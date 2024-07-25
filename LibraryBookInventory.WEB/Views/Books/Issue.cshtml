@@ -1,0 +1,48 @@
+﻿@model IssueBookFormViewModel
+@{
+    ViewData["Title"] = "Issue";
+    Layout = null;
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <form asp-action="Issue" method="post">
+            <div class="form-group">
+                <label asp-for="BookId" class="control-label">Select Book</label>
+                <select asp-for="BookId" class="form-control" asp-items="@(new SelectList(Model.Books, "Id", "Title"))"></select>
+                <span asp-validation-for="BookId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UserId" class="control-label">Select User</label>
+                <select asp-for="UserId" class="form-control" asp-items="@(new SelectList(Model.Users, "Id", "UserName"))"></select>
+                <span asp-validation-for="UserId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="IssuedDate" class="control-label">Issued Date</label>
+                <input asp-for="IssuedDate" class="form-control" />
+                <span asp-validation-for="IssuedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReturnDate" class="control-label">Return Date</label>
+                <input asp-for="ReturnDate" class="form-control" />
+                <span asp-validation-for="ReturnDate" class="text-danger"></span>
+            </div>
+            <div class="form-group text-right mt-5">
+                <button type="submit" class="btn btn-success btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Issue Book</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

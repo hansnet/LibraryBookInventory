@@ -1,0 +1,42 @@
+﻿@model IEnumerable<IssuedBookViewModel>
+@{
+    ViewData["Title"] = "Issued Books";
+    Layout = "_AdminLayout";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h3 class="h3 mb-0 text-gray-800">Issued Books</h3>
+    <button class="d-none d-sm-inline-block btn btn-md btn-primary shadow-sm" onclick="openGenericModal('@Url.Action("Issue", "Books")', 'Issue Book')">Issue Book</button>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Issued Books</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Book Title</th>
+                        <th>User</th>
+                        <th>Issued Date</th>
+                        <th>Return Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.UserName</td>
+                            <td>@item.IssuedDate</td>
+                            <td>@item.ReturnDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

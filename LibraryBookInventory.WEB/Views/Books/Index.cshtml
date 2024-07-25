@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BookViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_AdminLayout";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h3 class="h3 mb-0 text-gray-800">Books</h3>
+    <button class="d-none d-sm-inline-block btn btn-md btn-primary shadow-sm" onclick="openGenericModal('@Url.Action("Create", "Books")', 'Add New Book')">Add Book</button>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Available Books</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>ISBN</th>
+                        <th>Published Year</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.Author</td>
+                            <td>@item.ISBN</td>
+                            <td>@item.PublishedYear</td>
+                            <td class="d-flex justify-content-center">
+                                <div class="d-inline">
+                                    <a href="#" onclick="openGenericModal('@Url.Action("Edit", "Books")', 'Edit Book', @item.Id)"><i class="fas fa-fw fa-edit mr-2"></i></a>
+                                    <a href="#" onclick="openGenericModal('@Url.Action("Details", "Books")', 'Book Details', @item.Id)"><i class="fas fa-fw fa-eye mr-2"></i></a>
+                                    <a href="#" onclick="openGenericModal('@Url.Action("Delete", "Books")', 'Delete Book', @item.Id)"><i class="fas fa-fw fa-trash-alt text-danger mr-2"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
